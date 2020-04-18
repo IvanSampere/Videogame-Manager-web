@@ -1,7 +1,12 @@
 package com.example.demo;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Hability {
@@ -11,7 +16,7 @@ public class Hability {
 	private int life;
 	private int energy;
 	private String type;
-	
+
 
 	Hability(){
 	}
@@ -26,6 +31,7 @@ public class Hability {
 	public String getName() {
 		return name;
 	}
+	
 	public void setName(String name) {
 		this.name = name;
 	}
