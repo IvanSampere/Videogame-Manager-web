@@ -3,18 +3,14 @@ package com.example.demo;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -27,9 +23,17 @@ public abstract class Item {
 	
 	@OneToMany
 	@JoinColumn(name = "item")
-	protected List<Hability> accions = new ArrayList<Hability>();
+	protected List<Hability> accions;
 	
 	Item(){
+		name = "default";
+		value = -1;
+		accions = new ArrayList<Hability>(5); 
+	}
+	Item(String name, int value){
+		this.name = name;
+		this.value = value;
+		accions = new ArrayList<Hability>(5);
 	}
 	
 
@@ -53,7 +57,6 @@ public abstract class Item {
 	public List<Hability> getAccions() {
 		return accions;
 	}
-
 
 	public void setAccions(List<Hability> accions) {
 		this.accions = accions;
@@ -82,7 +85,6 @@ public abstract class Item {
 		}else {
 			same = false;
 		}
-		
 		return same;
 	}
 	
@@ -90,11 +92,11 @@ public abstract class Item {
 		boolean add = true;
 		
 		for(int i=0; i<this.accions.size() ; i++) {
-			if(hability.getName()==this.accions.get(i).getName()) {
+			if(hability.getName()==this.accions.get(i).getName() || this.accions.size()>=5) {
 				add = false; 
 			}
 		}
-		
+
 		if(add==true) {
 			this.accions.add(hability);
 		}
@@ -104,17 +106,14 @@ public abstract class Item {
 	
 	public boolean deleteHability(Hability hability) {
 		boolean delete = false;
-		int delete_index = -1;
 		
-		for(int i=0 ; i<this.accions.size() ; i++) {
-			if(this.accions.get(i).getName()==hability.getName()) {
-				delete = true;
-				delete_index = i;
-			}
+		if(this.accions.contains(hability)==true) {
+			delete = true;
 		}
 		
 		if(delete==true) {
-			this.accions.remove(delete_index);
+			int indexRemove = this.accions.indexOf(hability);
+			this.accions.remove(indexRemove);
 		}
 		
 		return delete;

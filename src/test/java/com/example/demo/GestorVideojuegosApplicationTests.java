@@ -1,8 +1,5 @@
 package com.example.demo;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -14,21 +11,39 @@ class GestorVideojuegosApplicationTests {
 	}
 
 	@Test
-	void testAddHability() {
+	void testDeleteHability() {
+		
 		Item item = new Weapon();
-		Hability hability = new Hability("habilidad1", 20, 20, "Fire");
 		
-		System.out.println(item.getAccions());
-		System.out.println(item.accions.toString());
+		Hability habilidad1 = new Hability();
+		Hability habilidad2 = new Hability();
+		Hability habilidad3 = new Hability();
+		Hability habilidad4 = new Hability();
+		Hability habilidad6 = new Hability();
+		habilidad6.setName("6");
 		
-		item.addHability(hability);
-		boolean check = item.accions.contains(hability);
-		System.out.println(check);
-		System.out.println(item.accions.toString());
-		System.out.println(item.getAccions().size());
-		item.deleteHability(hability);
-		System.out.println(item.accions.toString());
-		System.out.println(item.getAccions().size());
+		item.accions.add(habilidad1);
+		item.accions.add(habilidad2);
+		item.accions.add(habilidad3);
+		item.accions.add(habilidad4);
 		
+		System.out.println(item.accions.size());
+		System.out.println(item.toString());
+		
+		boolean delete = false;
+		
+		if(item.accions.contains(habilidad1)==true) {
+			delete = true;
+		}
+		
+		if(delete==true) {
+			int indexRemove = item.accions.indexOf(habilidad1);
+			item.accions.remove(indexRemove);
+		}
+		
+		System.out.println(item.toString());
+		
+		System.out.println(delete);
+		System.out.println(item.accions.size());
 	}
 }

@@ -1,5 +1,6 @@
 package com.example.demo;
 
+
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
@@ -11,7 +12,16 @@ public class Armor extends Item {
 	private int weight;
 	
 	Armor(){
-		
+		name = "default";
+		value = -1;
+		armor = -1;
+		weight= -1;
+	}
+	Armor(String name, int value, int armor, int weight){
+		this.name = name;
+		this.value = value;
+		this.armor = armor;
+		this.weight = weight;
 	}
 	
 	public int getArmor() {
@@ -30,7 +40,8 @@ public class Armor extends Item {
 	
 	@Override
 	public String toString() {
-		return "Armor [armor=" + armor + ", weight=" + weight + "]";
+		return "Armor [armor=" + armor + ", weight=" + weight + ", name=" + name + ", value=" + value + ",\n accions="
+				+ accions + "]";
 	}
 
 	
