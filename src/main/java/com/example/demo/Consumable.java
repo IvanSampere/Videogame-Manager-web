@@ -10,7 +10,14 @@ public class Consumable extends Item {
 	private int quantity;
 	
 	Consumable(){
-		
+		name = "default";
+		value = -1;
+		quantity = -1;
+	}
+	Consumable(String name, int value, int quantity){
+		this.name = name;
+		this.value = value;
+		this.quantity = quantity;
 	}
 
 	public int getQuantity() {
@@ -23,7 +30,8 @@ public class Consumable extends Item {
 
 	@Override
 	public String toString() {
-		return "Consumable [quantity=" + quantity + "]";
+		return "Consumable [quantity=" + quantity + ", name=" + name + ", value=" + value + ",\n accions=" + accions
+				+ "]";
 	}
 	
 	

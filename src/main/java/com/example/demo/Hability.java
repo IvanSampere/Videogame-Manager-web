@@ -1,12 +1,7 @@
 package com.example.demo;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 @Entity
 public class Hability {
@@ -19,6 +14,10 @@ public class Hability {
 
 
 	Hability(){
+		name = "default";
+		life = 0;
+		energy = 0;
+		type = "default";
 	}
 	Hability(String name, int life, int energy, String type){
 		this.name = name;

@@ -9,4 +9,3 @@ insert into hability (name, life, energy, type, item) values ('Spark', 30, 5, 'E
 insert into hability (name, life, energy, type, item) values ('Sink', 10, 2, 'Water', 'Potion')
 insert into hability (name, life, energy, type, item) values ('Earthquake', 50, 10, 'Ground', 'Sword')
 
-
