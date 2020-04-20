@@ -11,39 +11,37 @@ class GestorVideojuegosApplicationTests {
 	}
 
 	@Test
-	void testDeleteHability() {
+	void testValidateDni() {
+		boolean dniOk = false;
+		char letras[] = {'T','R','W','A','G','M','Y','F','P','D','X','B'
+				,'N','J','Z','S','Q','V','H','L','C','K','E','T'};
 		
-		Item item = new Weapon();
 		
-		Hability habilidad1 = new Hability();
-		Hability habilidad2 = new Hability();
-		Hability habilidad3 = new Hability();
-		Hability habilidad4 = new Hability();
-		Hability habilidad6 = new Hability();
-		habilidad6.setName("6");
+		String dni1 = "53248P94M";
+		String dni = dni1;
 		
-		item.accions.add(habilidad1);
-		item.accions.add(habilidad2);
-		item.accions.add(habilidad3);
-		item.accions.add(habilidad4);
 		
-		System.out.println(item.accions.size());
-		System.out.println(item.toString());
 		
-		boolean delete = false;
-		
-		if(item.accions.contains(habilidad1)==true) {
-			delete = true;
+		if(dni.length()==9) {
+			try {
+				
+				dni.toCharArray();
+				String subDni = dni.substring(0, 8);
+				int numDni = Integer.parseInt(subDni);
+				int result = numDni%23;
+				
+				if(dni.charAt(8)==letras[result]) {
+					dniOk = true;
+				}
+				
+			} catch(NumberFormatException e) {
+				System.out.println("Error en DNI");
+				dniOk = false;
+			}
+		}else {
+			dniOk = false;
 		}
 		
-		if(delete==true) {
-			int indexRemove = item.accions.indexOf(habilidad1);
-			item.accions.remove(indexRemove);
-		}
-		
-		System.out.println(item.toString());
-		
-		System.out.println(delete);
-		System.out.println(item.accions.size());
+		System.out.println(dniOk);
 	}
 }
