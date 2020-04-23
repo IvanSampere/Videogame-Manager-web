@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.example.demo.Hability;
 
 @Repository
-public interface HabilityRepository extends CrudRepository<Hability, String>{
+public interface HabilityRepository extends CrudRepository<Hability, Integer>{
+	
 
 }
