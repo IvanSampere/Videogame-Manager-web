@@ -8,5 +8,5 @@ import com.example.demo.Hability;
 @Repository
 public interface HabilityRepository extends CrudRepository<Hability, Integer>{
 	
-
+	
 }
