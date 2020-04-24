@@ -18,10 +18,6 @@ public class Hability {
 
 
 	Hability(){
-		name = "default";
-		life = 0;
-		energy = 0;
-		type = "default";
 	}
 	Hability(String name, int life, int energy, String type){
 		this.name = name;
@@ -31,10 +27,15 @@ public class Hability {
 	}
 	
 //	GETTERS AND SETTERS
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getName() {
 		return name;
 	}
-	
 	public void setName(String name) {
 		this.name = name;
 	}

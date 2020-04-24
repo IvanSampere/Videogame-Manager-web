@@ -49,22 +49,22 @@
     </ul>
   </nav>
   
-  <form class="form-register">
+  <form class="form-register" action="#" th:action="@{/hability/add}" th:object="${hability}" method="post">
     <div class="form-group">
       <label for="habilityName">Name</label>
-      <input type="text" class="form-control" id="habilityName">
+      <input type="text" class="form-control" th:field="*{name}">
     </div>
     <div class="form-group">
       <label for="habilityLife">Life</label><br>
-      <input type="number" size="6" name="Energy" min="0" value="">
+      <input type="number" size="6" name="Energy" min="0" value="" th:field="*{life}">
     </div>
     <div class="form-group">
       <label for="habilityEnergy">Energy</label><br>
-      <input type="number" size="6" name="Energy" min="0" value="">
+      <input type="number" size="6" name="Energy" min="0" value="" th:fiedl="*{energy}">
     </div>
     <div class="form-group">
       <label for="habilityType">Type</label>
-      <input type="text" class="form-control" id="habilityName">
+      <input type="text" class="form-control" th:field="*{type}">
     </div>
     <button type="submit" class="btn btn-primary" id="addHability">Add hability</button>
   </form>
@@ -75,12 +75,12 @@
       <img src="img/magic-wand.png" class="card-img-top" alt="hability image">
     </div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item" th:text="${hability.life}">VIDA</li>
-      <li class="list-group-item" th:text="${hability.energy}">ENERGIA</li>
-      <li class="list-group-item" th:text="${hability.type}">TIPO</li>
+     	<li class="list-group-item">Damage -> <b th:text="${hability.life}"></b></li>
+     	<li class="list-group-item">Energy -> <b th:text="${hability.energy}"></b></li>
+      	<li class="list-group-item">Type -> <b th:text="${hability.type}"></b></li>
     </ul>
     <div class="card-body">
-      <button type="submit" class="btn btn-primary" id="deletehability">Delete hability</button>
+    	<a th:href="@{ hability/delete/{id} (id=${hability.id}) }" class="card-text"><small class="text-muted">Delete</small></a>
     </div>
   </div>
 

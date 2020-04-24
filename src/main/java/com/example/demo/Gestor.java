@@ -1,11 +1,13 @@
 package com.example.demo;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.Repositories.HabilityRepository;
 import com.example.demo.Repositories.ItemRepositoy;
@@ -51,12 +53,36 @@ public class Gestor {
 	@RequestMapping("/hability")
 	public String hability(Model model) {
 		model.addAttribute("habilities",habilityRepo.findAll());
+		model.addAttribute("hability", new Hability());
 		return "hability";
 	}
-	
-	
-	
-	
+	/*
+	 * Este metodo borra una habilidad según su id
+	 */
+	@RequestMapping("/hability/delete/{id}")
+	public String deleteHability(@PathVariable("id") int id, Model model) {
+		habilityRepo.deleteById(id);
+		return "redirect:/hability";
+	}
+	/*
+	 * Este metodo añade una habilidad desde el formulario
+	 */
+	@PostMapping("/hability/add")
+	public String addHability(Hability hability) {
+		List<Hability> nameRepo = (List<Hability>) habilityRepo.findAll();
+		boolean add = true;
+		for(Hability name : nameRepo) {
+			if(hability.getName().equalsIgnoreCase(name.getName())) {
+				add=false;
+			}
+		}
+		
+		if(add==true) {
+			habilityRepo.save(hability);
+		}
+		
+		return "redirect:/hability";
+	}
 	
 	
 	
