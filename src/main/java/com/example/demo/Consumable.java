@@ -8,11 +8,9 @@ import javax.persistence.Entity;
 public class Consumable extends Item {
 
 	private int quantity;
+	private String type = "CONS";
 	
 	Consumable(){
-		name = "default";
-		value = -1;
-		quantity = -1;
 	}
 	Consumable(String name, int value, int quantity){
 		this.name = name;
@@ -27,7 +25,15 @@ public class Consumable extends Item {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	
+	
+	
 	@Override
 	public String toString() {
 		return "Consumable [quantity=" + quantity + ", name=" + name + ", value=" + value + ",\n accions=" + accions

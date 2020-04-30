@@ -7,25 +7,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.demo.Repositories.HabilityRepository;
+import com.example.demo.Repositories.ItemRepositoy;
 
 @SpringBootTest
 class GestorVideojuegosApplicationTests {
 	
+
 	@Autowired
-	HabilityRepository habilityRepo;
+	ItemRepositoy repo1;
 	
 	@Test
 	void testAddHability() {
 		
-		Hability hability = new Hability("Maribelita",1,1,"1");
-		habilityRepo.save(hability);
-		
-		List<Hability> nameRepo = (List<Hability>) habilityRepo.findAll();
-		
-		for(Hability name:nameRepo) {
-			System.out.println(name.getName());
-		}
-		
+		System.out.println(repo1.findByName("Helmet1"));
 		
 	}
 }

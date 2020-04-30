@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.example.demo.MainCharacter;
 
 @Repository
-public interface MainCharacterRepository extends CrudRepository<MainCharacter, String> {
+public interface MainCharacterRepository extends CrudRepository<MainCharacter, Integer> {
 
 }

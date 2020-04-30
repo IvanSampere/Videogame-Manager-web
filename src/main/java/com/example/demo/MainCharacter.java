@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -12,6 +14,8 @@ import javax.persistence.OneToMany;
 public class MainCharacter {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int id;
 	private String name;
 	private String kind;
 	private int max_life;

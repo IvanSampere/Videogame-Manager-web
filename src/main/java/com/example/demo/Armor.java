@@ -10,12 +10,9 @@ public class Armor extends Item {
 	
 	private int armor;
 	private int weight;
+	private String type = "ARMOR";
 	
 	Armor(){
-		name = "default";
-		value = -1;
-		armor = -1;
-		weight= -1;
 	}
 	Armor(String name, int value, int armor, int weight){
 		this.name = name;
@@ -35,6 +32,12 @@ public class Armor extends Item {
 	}
 	public void setWeight(int weight) {
 		this.weight = weight;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
 	}
 	
 	
