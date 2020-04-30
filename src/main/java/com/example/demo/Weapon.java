@@ -10,13 +10,10 @@ public class Weapon extends Item {
 
 	private int grievance;
 	private int weight;
+	private String type = "WEAP";
 	
 	
 	Weapon(){
-		name = "default";
-		value = -1;
-		grievance = -1;
-		weight = -1;
 	}
 	Weapon(String name, int value, int grievance, int weight){
 		this.name = name;
@@ -38,6 +35,14 @@ public class Weapon extends Item {
 	public void setWeight(int weight) {
 		this.weight = weight;
 	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	
+	
 	@Override
 	public String toString() {
 		return "Weapon [grievance=" + grievance + ", weight=" + weight + ", name=" + name + ", value=" + value

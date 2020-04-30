@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <title>Armor</title>
+</head>
+<body >
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <nav class="navbar navbar-dark bg-dark">
+          <a class="navbar-brand" href="/index">
+            <img src="img/house-fill.svg" width="30" height="30" alt="">
+          </a>
+        </nav>
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/hability">Hability</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Item
+              </a>
+               	<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+	            	<a class="dropdown-item" href="/armor">Armor</a>
+	            <div class="dropdown-divider"></div>
+	            	<a class="dropdown-item" href="/weapon">Weapon</a>
+	            <div class="dropdown-divider"></div>
+	           	 	<a class="dropdown-item" href="/consumable">Consumables</a>
+          		</div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/character">Character</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/zone">Zone</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/mision">Mision</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    
+    
+      <div class="form-container">
+      
+	      <form class="form-register" th:action="@{/armor/add}" th:object=${newArmor} method=post >
+	        <div class="form-group">
+	          <label for="habilityName">Name</label>
+	          <input type="text" class="form-control" id="validationTooltip01" th:field="*{name}" required>
+	          <small id="textHelp" class="form-text text-muted">Cannot repeat names</small>
+	        </div>
+	        <div class="form-group">
+	          <label for="habilityLife">Valor</label><br>
+	          <input type="number" class="form-control" size="6" name="Energy" min="0" value=" "  th:field="*{value}" required>
+	        </div>
+	        <div class="form-group">
+	          <label for="habilityEnergy">Armadura</label><br>
+	          <input type="number" class="form-control" size="6" name="Energy" min="0" value=" "  th:field="*{armor}" required>
+	        </div>
+	        <div class="form-group">
+	          <label for="habilityType">Peso</label><br>
+	          <input type="number" class="form-control" size="6" name="Energy" min="0" value=" "  th:field="*{weight}" required>
+	        </div>
+	        <button type="submit" class="btn btn-primary" id="addHability">Add armor</button>
+	      </form>
+      
+	      <form class="form-register" th:action="@{/armor/addHability}" method=post>
+	        <div class="form-group">
+	          <label for="habilityName">Item</label>
+	          <select class="custom-select"  name="armorId" required>
+	          	<option value=""></option>
+	            <option th:each="getArmor : ${armors}" th:text="${getArmor.name}" th:value="${getArmor.name}"></option>
+	          </select>
+	        </div>
+	        <div class="form-group">
+	         <label for="habilityName">Hability</label>
+	          <select class="custom-select" name="habilityId" required>
+	            <option value=""></option>
+	            <option th:each="getHability : ${habilities}" th:text="${getHability.name}" th:value="${getHability.name}"></option>
+	          </select>
+	        </div>
+	        <button type="submit" class="btn btn-primary" >Add armor</button>
+	      </form>
+	      
+    </div>
+      
+ 
+	<div class="card" th:each="armor : ${armors}">
+        <div class="card-body">
+          <h5 class="card-title" th:text="${armor.name}">Name</h5>
+          <img src="img/armor.png" class="card-img-top" alt="armor image">
+        </div>
+        <ul class="list-group list-group-flush">
+           	<li class="list-group-item">Value  <b th:text="${armor.value}" ></b></li>
+           	<li class="list-group-item">Armor  <b th:text="${armor.armor}"></b></li>
+         	<li class="list-group-item">Weight <b th:text="${armor.weight}"></b></li>
+            <li class="list-group-item">
+              <div class="dropright">
+                  <p class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Habilities</p>
+                  <ul class="dropdown-menu" >
+                   	 <li class="list-group-item" th:each="accion : *{armor.accions}">
+	                   	 <small  th:text="${accion}" ></small> 
+	                   	 <a th:href="@{ armor/deleteHability/{armor}/{hability} (hability=${accion.name},armor=${armor.name}) }" class="btn btn-primary" 
+	                   	 	style="	display: block;
+								  	font-size: x-small;
+								 	height: auto;
+								 	width: 30%;
+								 	margin-top: 4px;
+								 	background-color: red;"
+	                   	 >Delete</a> 
+                   	 </li> 
+                  </ul>
+              </div>
+            </li>
+        </ul>
+        <div class="card-body">
+    		<a th:href="@{ armor/delete/{id} (id=${armor.id}) }" class="card-link" style="color: red"><small>Delete</small></a>
+   		</div>
+      </div>
+    
+    <div class="card-footer text-muted">
+    Ivan Sampere &copy;
+    </div>
+    
+</body>
+</html>

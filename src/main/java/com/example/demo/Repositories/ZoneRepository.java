@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.example.demo.Zone;
 
 @Repository
-public interface ZoneRepository extends CrudRepository<Zone, String> {
+public interface ZoneRepository extends CrudRepository<Zone, Integer> {
 
 }

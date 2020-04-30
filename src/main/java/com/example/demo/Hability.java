@@ -61,7 +61,7 @@ public class Hability {
 //	METHODS
 	@Override
 	public String toString() {
-		return "Hability [name=" + name + ", life=" + life + ", energy=" + energy + ", type=" + type + "]\n\r";
+		return "Name=" + name + ", life=" + life + ", \t energy=" + energy + ", type=" + type + "\n\r";
 	}
 	
 	public boolean theSame(Hability hability) {
