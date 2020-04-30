@@ -23,9 +23,10 @@ public interface ItemRepositoy extends CrudRepository<Item, Integer> {
 	@Query(value="SELECT * FROM ITEM WHERE TYPE_ID='CONS'", nativeQuery = true)
 	List<Item> findConsumables();
 	
-	@Modifying
-	@Query(value="insert into item (id, name, value, type, grievance, weight, type_id) values (:id, :name, :value, 'ARMOR', :armor, :weight, 'ARMOR')", nativeQuery = true)
-	void insertArmor( @Param("id") int id, @Param("name") String name, @Param("value") int value, @Param("armor") int armor, @Param("weight") int weight );
+//	@Modifying
+//	@Query(value="insert into item (id, name, value, type, grievance, weight, type_id) values (:id, :name, :value, 'ARMOR', :armor, :weight, 'ARMOR')", nativeQuery = true)
+//	void insertArmor( @Param("id") int id, @Param("name") String name, @Param("value") int value, @Param("armor") int armor, @Param("weight") int weight );
+//	
 	
 	Item findByName(String name);
 	

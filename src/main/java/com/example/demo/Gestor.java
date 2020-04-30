@@ -45,7 +45,7 @@ public class Gestor {
 		
 		return "index";
 	}
-//	----------------HABILITY----------------
+//	-----------------------------------------------------------HABILITY------------------------------------------------------------------------------
 
 	@RequestMapping("/hability")
 	public String hability(Model model) {
@@ -81,7 +81,7 @@ public class Gestor {
 		return "redirect:/hability";
 	}
 	
-//	----------------ARMOR----------------	
+//	-----------------------------------------------------------ARMOR------------------------------------------------------------------------------
 	@RequestMapping("/armor")
 	public String armor(Model model) {
 		model.addAttribute("habilities",habilityRepo.findAll());
@@ -110,12 +110,11 @@ public class Gestor {
 			itemRepo.save(armor);
 		}
 		
-		
 		return "redirect:/armor";
 	}
 	
 	@PostMapping(value="/armor/addHability",params = {"armorId", "habilityId"})
-	public String addHabilityToArmor(final HttpServletRequest req, Model model) {
+	public String addHabilityToArmor(final HttpServletRequest req) {
 		
 		String armorName = req.getParameter("armorId");
 		String habilityName = req.getParameter("habilityId");
@@ -140,6 +139,133 @@ public class Gestor {
 		
 		return "redirect:/armor";
 	}
+	
+
+//	-----------------------------------------------------------WEAPON------------------------------------------------------------------------------
+
+	@RequestMapping("/weapon")
+	public String weapon(Model model) {
+		model.addAttribute("habilities",habilityRepo.findAll());
+		model.addAttribute("weapons", itemRepo.findWeapons());
+		model.addAttribute("newWeapon" , new Weapon());
+		return "weapon";
+	}
+	
+	@RequestMapping("/weapon/delete/{id}")
+	public String deleteWeapon(@PathVariable("id") int id) {
+		itemRepo.deleteById(id);
+		return "redirect:/weapon";
+	}
+	
+	@PostMapping("/weapon/add")
+	public String addWeapon(Weapon weapon) {
+		boolean add = true;
+		List<Item> checkWeapon = itemRepo.findWeapons();
+		for(Item i : checkWeapon) {
+			if(i.theSame(weapon)==true) {
+				add = false;
+			}
+		}
+		
+		if(add==true) {
+			itemRepo.save(weapon);
+		}
+		
+		return "redirect:/weapon";
+	}
+	
+	@PostMapping(value="/weapon/addHability",params = {"weaponId", "habilityId"})
+	public String addHabilityToWeapon(final HttpServletRequest req) {
+		
+		String weaponName = req.getParameter("weaponId");
+		String habilityName = req.getParameter("habilityId");
+		
+		Item weapon = itemRepo.findByName(weaponName);
+		Hability hability = habilityRepo.findByName(habilityName);
+		
+		weapon.addHability(hability);
+		itemRepo.save(weapon);
+		
+		return "redirect:/weapon";
+	}
+		
+	@RequestMapping("/weapon/deleteHability/{weapon}/{hability}")
+	public String deleteHabilityToWeapon(@PathVariable("hability") String idHab, @PathVariable("weapon") String idWeapon) {
+		
+		Item weapon = itemRepo.findByName(idWeapon);
+		Hability hability = habilityRepo.findByName(idHab);
+		
+		weapon.deleteHability(hability);
+		itemRepo.save(weapon);
+		
+		return "redirect:/weapon";
+	}
+	
+	
+	
+//	-----------------------------------------------------------CONSUMIABLES------------------------------------------------------------------------------
+
+	@RequestMapping("/consumable")
+	public String consumable(Model model) {
+		model.addAttribute("habilities",habilityRepo.findAll());
+		model.addAttribute("consumables", itemRepo.findConsumables());
+		model.addAttribute("newConsumable" , new Consumable());
+		return "consumable";
+	}
+	
+	@RequestMapping("/consumable/delete/{id}")
+	public String deleteConsumable(@PathVariable("id") int id) {
+		itemRepo.deleteById(id);
+		return "redirect:/consumable";
+	}
+	
+	@PostMapping("/consumable/add")
+	public String addConsumable(Consumable consumable) {
+		boolean add = true;
+		List<Item> checkConsumable = itemRepo.findConsumables();
+		for(Item i : checkConsumable) {
+			if(i.theSame(consumable)==true) {
+				add = false;
+			}
+		}
+		
+		if(add==true) {
+			itemRepo.save(consumable);
+		}
+		
+		return "redirect:/consumable";
+	}
+	
+	@PostMapping(value="/consumable/addHability",params = {"consumableId", "habilityId"})
+	public String addHabilityToconsumable(final HttpServletRequest req) {
+		
+		String consumableName = req.getParameter("consumableId");
+		String habilityName = req.getParameter("habilityId");
+		
+		Item consumable = itemRepo.findByName(consumableName);
+		Hability hability = habilityRepo.findByName(habilityName);
+		
+		consumable.addHability(hability);
+		itemRepo.save(consumable);
+		
+		return "redirect:/consumable";
+	}
+		
+	@RequestMapping("/consumable/deleteHability/{consumable}/{hability}")
+	public String deleteHabilityToConsumable(@PathVariable("hability") String idHab, @PathVariable("consumable") String idConsumable) {
+		
+		Item consumable = itemRepo.findByName(idConsumable);
+		Hability hability = habilityRepo.findByName(idHab);
+		
+		consumable.deleteHability(hability);
+		itemRepo.save(consumable);
+		
+		return "redirect:/consumable";
+	}
+	
+	
+	
+	
 	
 	
 }

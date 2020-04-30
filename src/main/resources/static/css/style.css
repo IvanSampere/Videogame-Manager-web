@@ -19,9 +19,9 @@ body{
 }
 
 .img-fluid{
-	width: 100%;
+	width: 74%;
  	height: auto;
- 	margin: 7.5px auto ;
+ 	margin: 7.5px 13% ;
 }
 
 .form-container{

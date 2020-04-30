@@ -8,7 +8,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <title>Armor</title>
+    <title>Weapon</title>
 </head>
 <body >
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
@@ -50,7 +50,7 @@
     
       <div class="form-container">
       
-	      <form class="form-register" th:action="@{/armor/add}" th:object=${newArmor} method=post >
+	      <form class="form-register" th:action="@{/weapon/add}" th:object=${newWeapon} method=post >
 	        <div class="form-group">
 	          <label for="habilityName">Name</label>
 	          <input type="text" class="form-control" id="validationTooltip01" th:field="*{name}" required>
@@ -61,22 +61,22 @@
 	          <input type="number" class="form-control" size="6" name="Energy" min="0" value=" "  th:field="*{value}" required>
 	        </div>
 	        <div class="form-group">
-	          <label for="habilityEnergy">Armor</label><br>
-	          <input type="number" class="form-control" size="6" name="Energy" min="0" value=" "  th:field="*{armor}" required>
+	          <label for="habilityEnergy">Grievance</label><br>
+	          <input type="number" class="form-control" size="6" name="Energy" min="0" value=" "  th:field="*{grievance}" required>
 	        </div>
 	        <div class="form-group">
 	          <label for="habilityType">Weight</label><br>
 	          <input type="number" class="form-control" size="6" name="Energy" min="0" value=" "  th:field="*{weight}" required>
 	        </div>
-	        <button type="submit" class="btn btn-primary" id="addHability">Add armor</button>
+	        <button type="submit" class="btn btn-primary" id="addHability">Add weapon</button>
 	      </form>
       
-	      <form class="form-register" th:action="@{/armor/addHability}" method=post>
+	      <form class="form-register" th:action="@{/weapon/addHability}" method=post>
 	        <div class="form-group">
-	          <label for="habilityName">Armor</label>
-	          <select class="custom-select"  name="armorId" required>
+	          <label for="habilityName">Weapon</label>
+	          <select class="custom-select"  name="weaponId" required>
 	          	<option value=""></option>
-	            <option th:each="getArmor : ${armors}" th:text="${getArmor.name}" th:value="${getArmor.name}"></option>
+	            <option th:each="getWeapon : ${weapons}" th:text="${getWeapon.name}" th:value="${getWeapon.name}"></option>
 	          </select>
 	        </div>
 	        <div class="form-group">
@@ -92,22 +92,22 @@
     </div>
       
  
-	<div class="card" th:each="armor : ${armors}">
+	<div class="card" th:each="weapon : ${weapons}">
         <div class="card-body">
-          <h5 class="card-title" th:text="${armor.name}">Name</h5>
-          <img src="img/armor.png" class="card-img-top" alt="armor image">
+          <h5 class="card-title" th:text="${weapon.name}">Name</h5>
+          <img src="img/swords.png" class="card-img-top" alt="weapon image">
         </div>
         <ul class="list-group list-group-flush">
-           	<li class="list-group-item">Value  <b th:text="${armor.value}" ></b></li>
-           	<li class="list-group-item">Armor  <b th:text="${armor.armor}"></b></li>
-         	<li class="list-group-item">Weight <b th:text="${armor.weight}"></b></li>
+           	<li class="list-group-item">Value  <b th:text="${weapon.value}" ></b></li>
+           	<li class="list-group-item">Grievance  <b th:text="${weapon.grievance}"></b></li>
+         	<li class="list-group-item">Weight <b th:text="${weapon.weight}"></b></li>
             <li class="list-group-item">
               <div class="dropright">
                   <p class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Habilities</p>
                   <ul class="dropdown-menu" >
-                   	 <li class="list-group-item" th:each="accion : *{armor.accions}">
+                   	 <li class="list-group-item" th:each="accion : *{weapon.accions}">
 	                   	 <small  th:text="${accion}" ></small> 
-	                   	 <a th:href="@{ armor/deleteHability/{armor}/{hability} (hability=${accion.name},armor=${armor.name}) }" class="btn btn-primary" 
+	                   	 <a th:href="@{ weapon/deleteHability/{weapon}/{hability} (hability=${accion.name},weapon=${weapon.name}) }" class="btn btn-primary" 
 	                   	 	style="	display: block;
 								  	font-size: x-small;
 								 	height: auto;
@@ -121,7 +121,7 @@
             </li>
         </ul>
         <div class="card-body">
-    		<a th:href="@{ armor/delete/{id} (id=${armor.id}) }" class="card-link" style="color: red"><small>Delete</small></a>
+    		<a th:href="@{ weapon/delete/{id} (id=${weapon.id}) }" class="card-link" style="color: red"><small>Delete</small></a>
    		</div>
       </div>
     
