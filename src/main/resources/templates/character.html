@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset='utf-8'>
+    <title>Character</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"> 
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+    
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <nav class="navbar navbar-dark bg-dark">
+      <a class="navbar-brand" href="/index">
+        <img src="img/house-fill.svg" width="30" height="30" alt="">
+      </a>
+    </nav>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/hability">Hability</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Item
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/armor">Armor</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/weapon">Weapon</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/consumable">Consumables</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/character">Character</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/zone">Zone</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/mision">Mision</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  
+  <div class="form-container">
+      
+	      <form class="form-register" th:action="@{/character/add}" th:object="${newCharacter}"   method=post >
+	        <div class="form-group">
+	          <label >Name</label>
+	          <input type="text" class="form-control" id="validationTooltip01" th:field="*{name}" required>
+	          <small id="textHelp" class="form-text text-muted">Cannot repeat names</small>
+	        </div>
+	         <div class="form-group">
+	          <label >Kind</label>
+	          <input type="text" class="form-control" id="validationTooltip01" th:field="*{kind}" required>
+	        </div>
+	        <div class="form-group">
+	          <label for="habilityLife">Life</label><br>
+	          <input type="number" class="form-control" size="6" name="Life" min="0" th:field="*{actual_life}" required>
+	        </div>
+	        <div class="form-group">
+	          <label for="habilityEnergy">Energy</label><br>
+	          <input type="number" class="form-control" size="6" name="Energy" min="0" th:field="*{actual_energy}" required>
+	        </div>
+	        <div class="form-group">
+	          <label for="habilityType">Coins</label><br>
+	          <input type="number" class="form-control" size="6" name="Energy" min="0" th:field="*{coins}" required>
+	        </div>
+	        <div class="form-group">
+	         <label>NPC</label>
+		       	<div class="col-sm-10">
+			       	<div class="form-check">
+			          <input class="form-check-input" type="radio" th:field="*{npc}" th:value="true" >
+			          <label class="form-check-label" for="gridRadios1">True</label>
+		        	</div>
+			       	<div class="form-check">
+			          <input class="form-check-input" type="radio" th:field="*{npc}" th:value="false"  >
+			          <label class="form-check-label" for="gridRadios1">False</label>
+		        	</div>
+	        	</div>
+	        </div>
+	        <div class="form-group">
+	        <label>Hostile</label>
+	        	<div class="col-sm-10">
+			       	<div class="form-check">
+			          <input class="form-check-input" type="radio" th:field="*{hostile}" th:value="true" >
+			          <label class="form-check-label" for="gridRadios1">True</label>
+		        	</div>
+			       	<div class="form-check">
+			          <input class="form-check-input" type="radio" th:field="*{hostile}" th:value="false" >
+			          <label class="form-check-label" for="gridRadios1">False</label>
+		        	</div>
+	        	</div>
+	        </div>
+	        <button type="submit" class="btn btn-primary">Add character</button>
+	      </form>
+      
+	      <form class="form-register" th:action="@{/character/addHability}"  method=post>
+	        <div class="form-group">
+	          <label >Character</label>
+	          <select class="custom-select"  name="characterId" required>
+	          	<option value=""></option>
+	            <option th:each="getCharacter : ${characters}" th:text="${getCharacter.name}" th:value="${getCharacter.name}"></option>
+	          </select>
+	        </div>
+	        <div class="form-group">
+	         <label >Hability</label>
+	          <select class="custom-select" name="habilityId" required>
+	            <option value=""></option>
+	            <option th:each="getHability : ${habilities}" th:text="${getHability.name}" th:value="${getHability.name}"></option>
+	          </select>
+	        </div>
+	        <button type="submit" class="btn btn-primary" >Add hability</button>
+	      </form>
+	      
+	      <form class="form-register" th:action="@{/character/addItem}"  method=post>
+	        <div class="form-group">
+	          <label >Character</label>
+	          <select class="custom-select"  name="characterId" required>
+	          	<option value=""></option>
+	          	<option th:each="getCharacter : ${characters}" th:text="${getCharacter.name}" th:value="${getCharacter.name}"></option>
+	          </select>
+	        </div>
+	        <div class="form-group">
+	         <label >Item</label>
+	          <select class="custom-select" name="itemId" required>
+	            <option value=""></option>	            
+	            <option th:each="getItem : ${items}" th:text="${getItem.name}" th:value="${getItem.name}"></option>
+	          </select>
+	        </div>
+	        <button type="submit" class="btn btn-primary" >Add item</button>
+	      </form>
+    </div>
+  
+  	
+  	<div class="card" th:each="character : ${characters}">
+        <div class="card-body">
+          <h5 class="card-title" th:text="${character.name}">Name</h5>
+          <img src="img/superhero.png" class="card-img-top" alt="character image">
+        </div>
+        <ul class="list-group list-group-flush">
+           	<li class="list-group-item">Kind  <b th:text="${character.kind}" ></b></li>
+           	<li class="list-group-item">Life  <b th:text="${character.actual_life}"></b></li>
+          	<li class="list-group-item">Energy  <b th:text="${character.actual_energy}"></b></li>
+         	<li class="list-group-item">Coins <b th:text="${character.coins}"></b></li>
+         	<li class="list-group-item">NPC   <b th:text="${character.npc}"></b></li>
+         	<li class="list-group-item">Hostile <b th:text="${character.hostile}"></b></li>
+            <li class="list-group-item">
+              <div class="dropright">
+                  <p class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Habilities</p>
+                  <ul class="dropdown-menu" >
+                   	 <li class="list-group-item" th:each="habilities : *{character.habilities}">
+	                   	 <small  th:text="${habilities}" ></small> 
+	                   	 <a th:href="@{ character/deleteHability/{character}/{hability} (hability=${habilities.name},character=${character.name}) }" class="btn btn-primary" 
+	                   	 	style="	display: block;
+								  	font-size: x-small;
+								 	height: auto;
+								 	width: 30%;
+								 	margin-top: 4px;
+								 	background-color: red;"
+	                   	 >Delete</a> 
+                   	 </li> 
+                  </ul>
+              </div>
+              <div class="dropright">
+                  <p class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Set</p>
+                  <ul class="dropdown-menu" >
+                   	 <li class="list-group-item" th:each="set : *{character.set}">
+	                   	 <small  th:text="${set.name}" ></small> 
+	                   	 <a th:href="@{ character/deleteSet/{character}/{set} (set=${set.name},character=${character.name}) }" class="btn btn-primary" 
+	                   	 	style="	display: block;
+								  	font-size: x-small;
+								 	height: auto;
+								 	width: 30%;
+								 	margin-top: 4px;
+								 	background-color: red;"
+	                   	 >Delete</a> 
+                   	 </li> 
+                  </ul>
+              </div>
+            </li>
+        </ul>
+        <div class="card-body">
+    		<a th:href="@{ character/delete/{id} (id=${character.id}) }" class="card-link" style="color: red"><small>Delete</small></a>
+   		</div>
+      </div>
+  
+  
+	<div class="card-footer text-muted">
+	    Ivan Sampere &copy;
+	</div>
+  
+</body>
+</html>

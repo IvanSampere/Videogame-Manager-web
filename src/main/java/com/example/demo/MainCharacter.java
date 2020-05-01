@@ -36,17 +36,7 @@ public class MainCharacter {
 	
 	
 	MainCharacter(){
-		name = "default"; 
-		kind = "default"; 
-		max_life = 100;
-		max_energy = 50;
-		actual_life = 10;
-		actual_energy = 5;
-		coins = 0;
-		npc = true;
-		hostile = false;
-		habilities = new ArrayList<Hability>(5);
-		set = new ArrayList<Item>(10);
+		
 	}
 	MainCharacter(String name, String kind, int max_life, int max_energy, int actual_life, int actual_energy, int coins, boolean npc, boolean hostile){
 		this.name = name; 
@@ -64,6 +54,12 @@ public class MainCharacter {
 	
 	
 //	GETTERS AND SETTERS
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getName() {
 		return name;
 	}
@@ -143,7 +139,7 @@ public class MainCharacter {
 	public boolean theSame(MainCharacter character) {
 		boolean same = false;
 		
-		if(this.name==character.name) {
+		if(this.name.equalsIgnoreCase(character.name)) {
 			same = true;
 		}
 		

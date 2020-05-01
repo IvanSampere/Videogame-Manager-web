@@ -32,7 +32,7 @@ public class Gestor {
 	@Autowired
 	ItemRepositoy itemRepo;
 	@Autowired
-	MainCharacterRepository mainCharacterRepo;
+	MainCharacterRepository characterRepo;
 	@Autowired
 	MisionRepository misionRepo;
 	@Autowired
@@ -265,6 +265,227 @@ public class Gestor {
 	
 	
 	
+	
+//	-----------------------------------------------------------CHARACTER------------------------------------------------------------------------------
+
+	@RequestMapping("/character")
+	public String character(Model model) {
+		model.addAttribute("characters",characterRepo.findAll());
+		model.addAttribute("habilities",habilityRepo.findAll());
+		model.addAttribute("items", itemRepo.findAll());
+		model.addAttribute("newCharacter", new MainCharacter());
+		
+		return "character";
+	}
+	
+	@RequestMapping("/character/delete/{id}")
+	public String deleteCharacter(@PathVariable("id") int id) {
+		characterRepo.deleteById(id);
+		return "redirect:/character";
+	}
+	
+	@PostMapping("/character/add")
+	public String addCharacter(MainCharacter character) {
+		boolean add = true;
+		List<MainCharacter> checkCharacter = (List<MainCharacter>) characterRepo.findAll();
+		for(MainCharacter i : checkCharacter) {
+			if(i.theSame(character)==true) {
+				add = false;
+			}
+		}
+		
+		if(add==true) {
+			characterRepo.save(character);
+		}
+		
+		return "redirect:/character";
+	}
+	
+	@RequestMapping(value="/character/addHability",params = {"characterId", "habilityId"})
+	public String addHabilityToCharacter(final HttpServletRequest req) {
+		
+		String characterName = req.getParameter("characterId");
+		String habilityName = req.getParameter("habilityId");
+		
+		MainCharacter character = characterRepo.findByName(characterName);
+		Hability hability = habilityRepo.findByName(habilityName);
+		
+		character.getHabilities().add(hability);
+		characterRepo.save(character);
+		
+		return "redirect:/character";
+	}
+	@RequestMapping(value="/character/addItem",params = {"characterId", "itemId"})
+	public String addItemToCharacter(final HttpServletRequest req) {
+		
+		String characterName = req.getParameter("characterId");
+		String itemName = req.getParameter("itemId");
+		
+		MainCharacter character = characterRepo.findByName(characterName);
+		Item item = itemRepo.findByName(itemName);
+		
+		character.getSet().add(item);
+		characterRepo.save(character);
+		
+		return "redirect:/character";
+	}
+	
+	@RequestMapping("/character/deleteHability/{character}/{hability}")
+	public String deleteHabilityToCharacter(@PathVariable("hability") String idHab, @PathVariable("character") String idCharacter) {
+	
+		MainCharacter character = characterRepo.findByName(idCharacter);
+		Hability hability = habilityRepo.findByName(idHab);
+		
+		character.getHabilities().remove(hability);
+		characterRepo.save(character);
+		
+		return "redirect:/character";
+	}
+	@RequestMapping("/character/deleteSet/{character}/{item}")
+	public String deleteItemToCharacter(@PathVariable("item") String idItem, @PathVariable("character") String idCharacter) {
+	
+		MainCharacter character = characterRepo.findByName(idCharacter);
+		Item item = itemRepo.findByName(idItem);
+		
+		character.getSet().remove(item);
+		characterRepo.save(character);
+		
+		return "redirect:/character";
+	}
+	
+	
+//	-----------------------------------------------------------ZONE------------------------------------------------------------------------------
+
+	@RequestMapping("/zone")
+	public String zone(Model model) {
+		model.addAttribute("characters",characterRepo.findAll());
+		model.addAttribute("zones", zoneRepo.findAll());
+		model.addAttribute("newZone", new Zone());
+		
+		return "zone";
+	}
+	
+	@RequestMapping("/zone/delete/{id}")
+	public String deleteZone(@PathVariable("id") int id) {
+		zoneRepo.deleteById(id);
+		return "redirect:/zone";
+	}
+	
+	@PostMapping("/zone/add")
+	public String addZone(Zone zone) {
+		boolean add = true;
+		List<Zone> checkZone = (List<Zone>) zoneRepo.findAll();
+		for(Zone i : checkZone) {
+			if(i.theSame(zone)==true) {
+				add = false;
+			}
+		}
+		
+		if(add==true) {
+			zoneRepo.save(zone);
+		}
+		
+		return "redirect:/zone";
+	}
+	
+	@RequestMapping(value="/zone/addNpc",params = {"characterId", "zoneId"})
+	public String addNpcToZone(final HttpServletRequest req) {
+		
+		String characterName = req.getParameter("characterId");
+		String zoneName = req.getParameter("zoneId");
+		
+		MainCharacter character = characterRepo.findByName(characterName);
+		Zone zone = zoneRepo.findByName(zoneName);
+		
+		
+		zone.getNpcs().add(character);
+		zoneRepo.save(zone);
+		
+		return "redirect:/zone";
+	}
+	
+	@RequestMapping("/zone/deleteNpc/{zone}/{npc}")
+	public String deleteNpcToZone(@PathVariable("zone") String idZone, @PathVariable("npc") String idNpc) {
+	
+		MainCharacter character = characterRepo.findByName(idNpc);
+		Zone zone = zoneRepo.findByName(idZone);
+		
+		zone.getNpcs().remove(character);
+		zoneRepo.save(zone);
+		
+		return "redirect:/zone";
+	}
+	
+	
+//	-----------------------------------------------------------MISION------------------------------------------------------------------------------
+
+	@RequestMapping("/mision")
+	public String mision(Model model) {
+		model.addAttribute("misions", misionRepo.findAll());
+		model.addAttribute("objetives",characterRepo.findAll());
+		model.addAttribute("zones", zoneRepo.findAll());
+		model.addAttribute("rewards", itemRepo.findAll());
+		model.addAttribute("newMision", new Mision());
+		
+		return "mision";
+	}
+	
+	@RequestMapping("/mision/delete/{id}")
+	public String deleteMision(@PathVariable("id") int id) {
+		misionRepo.deleteById(id);
+		return "redirect:/mision";
+	}
+	
+	@PostMapping("/mision/add")
+	public String addMision(Mision mision) {
+		misionRepo.save(mision);
+		return "redirect:/mision";
+	}
+	
+	@RequestMapping(value="/mision/addObjetive",params = {"objetiveId", "misionId"})
+	public String addObjetiveToMision(final HttpServletRequest req) {
+		
+		String objetiveName = req.getParameter("objetiveId");
+		String misionName = req.getParameter("misionId");
+		
+		MainCharacter character = characterRepo.findByName(objetiveName);
+		Mision mision = misionRepo.findByName(misionName);
+		
+		
+		mision.setObjetive(character);
+		misionRepo.save(mision);
+		
+		return "redirect:/mision";
+	}
+	@RequestMapping(value="/mision/addZone",params = {"zoneId", "misionId"})
+	public String addZoneToMision(final HttpServletRequest req) {
+		
+		String zoneName = req.getParameter("zoneId");
+		String misionName = req.getParameter("misionId");
+		
+		Zone zone = zoneRepo.findByName(zoneName);
+		Mision mision = misionRepo.findByName(misionName);
+		
+		
+		mision.setZone(zone);
+		misionRepo.save(mision);
+		
+		return "redirect:/mision";
+	}
+	@RequestMapping(value="/mision/addReward",params = {"rewardId", "misionId"})
+	public String addCharacterToMision(final HttpServletRequest req) {
+		
+		String rewardName = req.getParameter("rewardId");
+		String misionName = req.getParameter("misionId");
+		
+		Item item = itemRepo.findByName(rewardName);
+		Mision mision = misionRepo.findByName(misionName);
+		
+		mision.setReward(item);
+		misionRepo.save(mision);
+		
+		return "redirect:/mision";
+	}
 	
 	
 	
