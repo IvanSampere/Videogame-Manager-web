@@ -8,4 +8,6 @@ import com.example.demo.User;
 @Repository
 public interface UserRepository extends CrudRepository<User, Long> {
 
+	User findByNick(String name);
+	
 }

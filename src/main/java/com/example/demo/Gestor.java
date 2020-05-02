@@ -1,7 +1,6 @@
 package com.example.demo;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,8 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.Repositories.HabilityRepository;
 import com.example.demo.Repositories.ItemRepositoy;
@@ -40,11 +37,57 @@ public class Gestor {
 	@Autowired
 	ZoneRepository zoneRepo;
 	
+//	-----------------------------------------------------------LOGIN & REGISTER------------------------------------------------------------------------------
+
+	@RequestMapping("/")
+	public String login1(Model model) {
+		model.addAttribute("user", new User());
+		
+		
+		return "login";
+	}
+	
+	@RequestMapping("/login")
+	public String login(Model model) {
+		model.addAttribute("user", new User());
+		return "login";
+	}
+	
+	@RequestMapping("/login/register")
+	public String register(User user, Model model) {
+		userRepo.save(user);
+		return "redirect:/login";
+	}
+	
+	@GetMapping(value="/login/validate",params = {"nickId", "password"})
+	public String loginValidate(final HttpServletRequest req) {
+		
+		String nick = req.getParameter("nickId");
+		String password = req.getParameter("password");
+		
+		User user = userRepo.findByNick(nick);
+		
+		if(user == null) {
+			return "redirect:/login";
+		}else {
+			if(user.getPassword().equals(password)) {
+				return "redirect:/index" ;
+			}else {
+				return "redirect:/login";
+			}
+		}
+		
+	}
+	
+//	-----------------------------------------------------------INDEX------------------------------------------------------------------------------
+
+	
 	@RequestMapping("/index")
 	public String index() {
 		
 		return "index";
 	}
+	
 //	-----------------------------------------------------------HABILITY------------------------------------------------------------------------------
 
 	@RequestMapping("/hability")
