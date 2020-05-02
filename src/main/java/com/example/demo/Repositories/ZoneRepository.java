@@ -8,4 +8,7 @@ import com.example.demo.Zone;
 @Repository
 public interface ZoneRepository extends CrudRepository<Zone, Integer> {
 
+	Zone findByName(String name);
+
+	
 }

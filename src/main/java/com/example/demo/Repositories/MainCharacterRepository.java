@@ -8,4 +8,6 @@ import com.example.demo.MainCharacter;
 @Repository
 public interface MainCharacterRepository extends CrudRepository<MainCharacter, Integer> {
 
+	MainCharacter findByName(String name);
+	
 }

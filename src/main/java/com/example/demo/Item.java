@@ -82,7 +82,7 @@ public abstract class Item {
 //	METHODS
 	@Override
 	public String toString() {
-		return "Item [name=" + name + ", value=" + value + ", accions=" + accions + "]";
+		return "Item [name=" + name + ", value=" + value + ", Accions: \t" + accions + "]";
 	}
 	
 	public boolean theSame(Item item) {

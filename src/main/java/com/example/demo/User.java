@@ -11,21 +11,20 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	private String name;
 	private String nick;
 	private String email;
 	private String dni;
-	private String pass;
-	private String type;
+	private String password;
 	
 	User(){
 		
 	}
-	User(String nick, String email, String dni, String pass, String type){
+	User(String nick, String email, String dni, String password, String type){
 		this.nick = nick;
 		this.email = email;
 		this.dni = dni;
-		this.pass = pass;
-		this.type = type;
+		this.password = password;
 	}
 	
 	
@@ -35,6 +34,12 @@ public class User {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getNick() {
 		return nick;
@@ -54,25 +59,19 @@ public class User {
 	public void setDni(String dni) {
 		this.dni = dni;
 	}
-	public String getPass() {
-		return pass;
+	public String getPassword() {
+		return password;
 	}
-	public void setPass(String pass) {
-		this.pass = pass;
-	}
-	public String getType() {
-		return type;
-	}
-	public void setType(String type) {
-		this.type = type;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 	
-//	METHODS
+	
+	//	METHODS
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", nick=" + nick + ", email=" + email + ", dni=" + dni + ", pass=" + pass + ", type="
-				+ type + "]";
+		return "User [id=" + id + ", name=" + name + ", nick=" + nick + ", email=" + email + ", dni=" + dni + ", password=" + password +"]";
 	}
 	
 	public boolean validateAnyDni(String dni) {

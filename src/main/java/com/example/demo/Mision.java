@@ -19,35 +19,35 @@ public class Mision {
 	private int coins;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "character")
-	private MainCharacter character;
+	@JoinColumn(name = "objetive")
+	private MainCharacter objetive;
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "zone")
 	private Zone zone;
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "item")
-	private Item item;
+	@JoinColumn(name = "reward")
+	private Item reward;
 	
 	
 	Mision(){
-		name = "default";
-		level = 0;
-		coins = 0;
-		character = new MainCharacter();
-		zone = new Zone();
-		item =  null;
 	}
 	Mision(String name, int level, int coins, MainCharacter character, Zone zone, Item item){
 		this.name = name;
 		this.level = level;
 		this.coins = coins;
-		this.character = character;
+		this.objetive = character;
 		this.zone = zone;
-		this.item = item;
+		this.reward = item;
 	}
 	
 	
 //	GETTERS AND SETTERS
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getName() {
 		return name;
 	}
@@ -66,11 +66,11 @@ public class Mision {
 	public void setCoins(int coins) {
 		this.coins = coins;
 	}
-	public MainCharacter getCharacter() {
-		return character;
+	public MainCharacter getObjetive() {
+		return objetive;
 	}
-	public void setCharacter(MainCharacter character) {
-		this.character = character;
+	public void setObjetive(MainCharacter objetive) {
+		this.objetive = objetive;
 	}
 	public Zone getZone() {
 		return zone;
@@ -78,19 +78,17 @@ public class Mision {
 	public void setZone(Zone zone) {
 		this.zone = zone;
 	}
-	public Item getItem() {
-		return item;
+	public Item getReward() {
+		return reward;
 	}
-	public void setItem(Item item) {
-		this.item = item;
+	public void setReward(Item reward) {
+		this.reward = reward;
 	}
-	
-	
-//	METHODS
+	//	METHODS
 	@Override
 	public String toString() {
-		return "Mision [name=" + name + ", level=" + level + ", coins=" + coins + ", character=" + character + ", zone="
-				+ zone + ", item=" + item + "]";
+		return "Mision [name=" + name + ", level=" + level + ", coins=" + coins + ", character=" + objetive + ", zone="
+				+ zone + ", item=" + reward + "]";
 	}
 	
 	

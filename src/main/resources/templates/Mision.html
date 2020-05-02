@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <title>Armor</title>
+</head>
+<body >
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <nav class="navbar navbar-dark bg-dark">
+          <a class="navbar-brand" href="/index">
+            <img src="img/house-fill.svg" width="30" height="30" alt="">
+          </a>
+        </nav>
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/hability">Hability</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Item
+              </a>
+               	<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+	            	<a class="dropdown-item" href="/armor">Armor</a>
+	            <div class="dropdown-divider"></div>
+	            	<a class="dropdown-item" href="/weapon">Weapon</a>
+	            <div class="dropdown-divider"></div>
+	           	 	<a class="dropdown-item" href="/consumable">Consumables</a>
+          		</div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/character">Character</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/zone">Zone</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/mision">Mision</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    
+    
+      <div class="form-container">
+      
+	      <form class="form-register" th:action="@{/mision/add}" th:object=${newMision} method=post >
+	        <div class="form-group">
+	          <label for="habilityName">Name</label>
+	          <input type="text" class="form-control" id="validationTooltip01" th:field="*{name}" required>
+	          <small id="textHelp" class="form-text text-muted">Cannot repeat names</small>
+	        </div>
+	        <div class="form-group">
+	          <label for="habilityLife">Level</label><br>
+	          <input type="number" class="form-control" size="6" name="Energy" min="5" max="100" value=" "  th:field="*{level}" required>
+	        </div>
+	         <div class="form-group">
+	          <label for="habilityLife">Coins</label><br>
+	          <input type="number" class="form-control" size="6" name="Energy" min="100" max="10000" value=" "  th:field="*{coins}" required>
+	        </div>
+	        <button type="submit" class="btn btn-primary">Add zone</button>
+	      </form>
+	      
+	      <form class="form-register" th:action="@{/mision/addObjetive}" method=post>
+	        <div class="form-group">
+	          <label for="habilityName">Mision</label>
+	          <select class="custom-select"  name="misionId" required>
+	          	<option value=""></option>
+	            <option th:each="getMision : ${misions}" th:text="${getMision.name}" th:value="${getMision.name}"></option>
+	          </select>
+	        </div>
+	        <div class="form-group">
+	         <label for="habilityName">Objetives</label>
+	          <select class="custom-select" name="objetiveId" required>
+	            <option value=""></option>
+	            <option th:each="getObjetive : ${objetives}" th:text="${getObjetive.name}" th:value="${getObjetive.name}"></option>
+	          </select>
+	        </div>
+	        <button type="submit" class="btn btn-primary" >Add objetive</button>
+	      </form>
+	      
+	      <form class="form-register" th:action="@{/mision/addZone}" method=post>
+	        <div class="form-group">
+	          <label for="habilityName">Mision</label>
+	          <select class="custom-select"  name="misionId" required>
+	          	<option value=""></option>
+	            <option th:each="getMision : ${misions}" th:text="${getMision.name}" th:value="${getMision.name}"></option>
+	          </select>
+	        </div>
+	        <div class="form-group">
+	         <label for="habilityName">Zone</label>
+	          <select class="custom-select" name="zoneId" required>
+	            <option value=""></option>
+	            <option th:each="getZone : ${zones}" th:text="${getZone.name}" th:value="${getZone.name}"></option>
+	          </select>
+	        </div>
+	        <button type="submit" class="btn btn-primary" >Add zone</button>
+	      </form>
+	      
+	      <form class="form-register" th:action="@{/mision/addReward}" method=post>
+	        <div class="form-group">
+	          <label for="habilityName">Mision</label>
+	          <select class="custom-select"  name="misionId" required>
+	          	<option value=""></option>
+	            <option th:each="getMision : ${misions}" th:text="${getMision.name}" th:value="${getMision.name}"></option>
+	          </select>
+	        </div>
+	        <div class="form-group">
+	         <label for="habilityName">Reward</label>
+	          <select class="custom-select" name="rewardId" required>
+	            <option value=""></option>
+	            <option th:each="getReward : ${rewards}" th:text="${getReward.name}" th:value="${getReward.name}"></option>
+	          </select>
+	        </div>
+	        <button type="submit" class="btn btn-primary" >Add reward</button>
+	      </form>
+	      
+    </div>
+      
+ 
+	<div class="card" th:each="mision : ${misions}">
+        <div class="card-body">
+          <h5 class="card-title" th:text="${mision.name}">Name</h5>
+          <img src="img/goal.png" class="card-img-top" alt="mision image">
+        </div>
+        <ul class="list-group list-group-flush">
+           	<li class="list-group-item">Level  <b th:text="${mision.level}" ></b></li>
+           	<li class="list-group-item">Coins  <b th:text="${mision.coins}" ></b></li>
+            <li class="list-group-item">Objetive <b th:each="objetive : ${mision.objetive}" th:text="${objetive.name}" ></b></li>
+            <li class="list-group-item">Zone <b  th:each="zone : ${mision.zone}" th:text="${zone.name}" ></b></li>
+            <li class="list-group-item">Reward <b  th:each="reward : ${mision.reward}" th:text="${reward.name}" ></b></li>
+        </ul>
+        <div class="card-body">
+    		<a th:href="@{ mision/delete/{id} (id=${mision.id}) }" class="card-link" style="color: red"><small>Delete</small></a>
+   		</div>
+      </div>
+    
+    <div class="card-footer text-muted">
+    Ivan Sampere &copy;
+    </div>
+    
+</body>
+</html>

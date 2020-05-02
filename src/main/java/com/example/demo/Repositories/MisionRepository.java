@@ -8,4 +8,6 @@ import com.example.demo.Mision;
 @Repository
 public interface MisionRepository extends CrudRepository<Mision, Integer> {
 
+	Mision findByName(String name);
+	
 }

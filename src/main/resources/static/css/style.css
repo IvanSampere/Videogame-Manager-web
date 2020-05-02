@@ -1,10 +1,18 @@
 
-body{
+*{
 	width: auto;
 	height: auto;
 	margin: 0;
 	padding: 0;
 	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.div-padre{
+	background: yellow;
+	height: 150px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .navbar-brand{
@@ -19,7 +27,7 @@ body{
 }
 
 .img-fluid{
-	width: 74%;
+	width: 100%;
  	height: auto;
  	margin: 7.5px 13% ;
 }
@@ -54,7 +62,7 @@ body{
 }
 
 .card-footer{
-/*   	margin-top: 13px; */
+  	margin-top: 13px; 
 	position: relative;
 	right: 0;
 	bottom: 0;

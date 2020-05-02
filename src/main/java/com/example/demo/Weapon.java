@@ -46,7 +46,7 @@ public class Weapon extends Item {
 	@Override
 	public String toString() {
 		return "Weapon [grievance=" + grievance + ", weight=" + weight + ", name=" + name + ", value=" + value
-				+ ",\n accions=" + accions + "]";
+				+ ",\n Accions: " + accions + "]";
 	}
 
 

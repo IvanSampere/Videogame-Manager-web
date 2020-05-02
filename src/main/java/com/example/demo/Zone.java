@@ -24,9 +24,6 @@ public class Zone {
 	private List<MainCharacter> npcs;
 	
 	Zone(){
-		name = "default";
-		level = 0;
-		npcs = new ArrayList<MainCharacter>(10);
 	}
 	Zone(String name, int level){
 		this.name = name;
@@ -36,6 +33,12 @@ public class Zone {
 	
 	
 //	GETTERS AND SETTERS
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getName() {
 		return name;
 	}
