@@ -5,7 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,6 +38,10 @@ public class Gestor {
 	@Autowired
 	ZoneRepository zoneRepo;
 	
+//	Email
+	@Autowired
+	public JavaMailSender mailsender;
+	
 //	-----------------------------------------------------------LOGIN & REGISTER------------------------------------------------------------------------------
 
 	@RequestMapping("/")
@@ -56,6 +61,12 @@ public class Gestor {
 	@RequestMapping("/login/register")
 	public String register(User user, Model model) {
 		userRepo.save(user);
+		SimpleMailMessage message = new SimpleMailMessage();
+		message.setTo(user.getEmail());
+		message.setSubject("Email de prueba");
+		message.setText("Te has registrado en mi fabulosa página de prueba.");
+		mailsender.send(message);
+		
 		return "redirect:/login";
 	}
 	
