@@ -1,4 +1,4 @@
-# GestorVideojuego
+# Videogame Manager
 Exercise of creating a videogame manager
 This personal project (and the first project) has the function to add diferents part into a 
 invented game. You can add characters, habilities, three types of items, zones and misions.
