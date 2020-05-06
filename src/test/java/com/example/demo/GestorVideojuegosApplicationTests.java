@@ -8,19 +8,6 @@ import com.example.demo.Repositories.UserRepository;
 
 @SpringBootTest
 class GestorVideojuegosApplicationTests {
+
 	
-	@Autowired
-	UserRepository userRepo;
-	
-	@Test
-	void testAddHability() {
-		User user = new User();
-		
-		user.setNick("aaa");
-		
-		userRepo.save(user);
-		
-		User user2 = userRepo.findByNick("aaa");
-		System.out.println(user2.toString());
-	}
 }
