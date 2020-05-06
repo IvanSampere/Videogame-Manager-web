@@ -61,11 +61,11 @@ public class Gestor {
 	@RequestMapping("/login/register")
 	public String register(User user, Model model) {
 		userRepo.save(user);
-		SimpleMailMessage message = new SimpleMailMessage();
-		message.setTo(user.getEmail());
-		message.setSubject("Email de prueba");
-		message.setText("Te has registrado en mi fabulosa página de prueba.");
-		mailsender.send(message);
+//		SimpleMailMessage message = new SimpleMailMessage();
+//		message.setTo(user.getEmail());
+//		message.setSubject("Test email");
+//		message.setText("Te has registrado en mi fabulosa página de prueba.");
+//		mailsender.send(message);
 		
 		return "redirect:/login";
 	}
