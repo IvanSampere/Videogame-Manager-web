@@ -64,7 +64,7 @@ public class Gestor {
 //		SimpleMailMessage message = new SimpleMailMessage();
 //		message.setTo(user.getEmail());
 //		message.setSubject("Test email");
-//		message.setText("Te has registrado en mi fabulosa página de prueba.");
+//		message.setText("Congratulations, you succesfully registered!!.");
 //		mailsender.send(message);
 		
 		return "redirect:/login";
