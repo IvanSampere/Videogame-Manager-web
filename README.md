@@ -8,28 +8,33 @@ This exercise is based in Java, with the framework Spring; and use HTML5 for the
 thing in CSS3
 
 
+
+
+
 To send a email when is registered a person in the web uncomment the lines in the gestor controller:
 
 
-//    SimpleMailMessage message = new SimpleMailMessage();
+    //    SimpleMailMessage message = new SimpleMailMessage();
 
 
-//		message.setTo(user.getEmail());
+    //		message.setTo(user.getEmail());
 
 
-//		message.setSubject("Test email");
+    //		message.setSubject("Test email");
 
 
-//		message.setText("Congratulations, you succesfully registered!!.");
+    //		message.setText("Congratulations, you succesfully registered!!.");
 
 
-//		mailsender.send(message);
+    //		mailsender.send(message);
+
+
 
 
 And change a properties on the file aplication.properties in the resources:
 
 
-spring.mail.username= PUT A REAL EMAIL
+    spring.mail.username= PUT A REAL EMAIL
   
   
-spring.mail.password= PUT A REAL PASSWORD 
+    spring.mail.password= PUT A REAL PASSWORD 
