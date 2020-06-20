@@ -1,6 +1,6 @@
 # Videogame Manager
 
-This personal project (and the first project) has the function to add diferents part into a 
+This personal project has the function to add diferents part into a 
 invented game. You can add characters, habilities, three types of items, zones and misions.
 The first page is a login page, where you can login a register a user. All of the components 
 are saved into a h2 database. In "imports.sql" you have a few examples to imports to the database.
